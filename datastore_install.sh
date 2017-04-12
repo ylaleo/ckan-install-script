@@ -15,6 +15,10 @@ sudo -u postgres createdb -O ckan_default datastore_default -E utf-8
 #datastore_read_url="ckan.datastore.read_url = postgresql://datastore_default:pass@localhost/datastore_default"
 #grep -q -F 'datastore_plugin_activation_line' $ckan_config_file || echo 'datastore_plugin_activation_line"' >> $ckan_config_file
 
+#edit development.ini (uncomment and replace pass with the passwords you created for your ckan_default and datastore_default)
+ckan.datastore.write_url = postgresql://ckan_default:pass@localhost/datastore_default
+ckan.datastore.read_url = postgresql://datastore_default:pass@localhost/datastore_default
+
 #activate environment
 su ckan
 virtualenv --no-site-packages /usr/lib/ckan/default
@@ -25,3 +29,5 @@ paster --plugin=ckan datastore set-permissions -c /etc/ckan/default/development.
 
 #....and then paste it in the command line that appears after you run this command:
 sudo -u postgres psql --set ON_ERROR_STOP=1
+
+#copiar eschema de sql after de p.28
